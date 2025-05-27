@@ -1,0 +1,56 @@
+[
+  {
+    "player": "Squirtle",
+    "opponent": "Caterpie",
+    "winner": "player",
+    "turns": 4
+  },
+  {
+    "player": "Vulpix",
+    "opponent": "Vulpix",
+    "winner": "player",
+    "turns": 8
+  },
+  {
+    "player": "Pikachu",
+    "opponent": "Squirtle",
+    "winner": "player",
+    "turns": 3
+  },
+  {
+    "player": "Pikachu",
+    "opponent": "Charmander",
+    "winner": "player",
+    "turns": 5
+  },
+  {
+    "player": "Pidgey",
+    "opponent": "Bulbasaur",
+    "winner": "player",
+    "turns": 4
+  },
+  {
+    "player": "Pikachu",
+    "opponent": "Squirtle",
+    "winner": "player",
+    "turns": 3
+  },
+  {
+    "player": "Pikachu",
+    "opponent": "Squirtle",
+    "winner": "player",
+    "turns": 4
+  },
+  {
+    "player": "Pikachu",
+    "opponent": "Bulbasaur",
+    "winner": "player",
+    "turns": 8
+  },
+  {
+    "player": "Pikachu",
+    "opponent": "Squirtle",
+    "winner": "player",
+    "turns": 3
+  }
+]

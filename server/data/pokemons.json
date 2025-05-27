@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "name": "Pikachu",
+    "type": "Electric",
+    "strongAgainst": ["Water", "Flying"],
+    "weakAgainst": ["Ground"],
+    "image": "/images/pokemons/pikachu.png",
+    "hp": 100,
+    "basicAttack": { "name": "Quick Attack", "power": 10 },
+    "abilities": [
+      { "name": "Thunderbolt", "power": 25, "cooldown": 2, "type": "attack" },
+      { "name": "Electric Barrier", "power": 0, "cooldown": 3, "type": "defense" },
+      { "name": "Volt Heal", "power": 20, "cooldown": 4, "type": "heal" }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Charmander",
+    "type": "Fire",
+    "strongAgainst": ["Grass", "Bug"],
+    "weakAgainst": ["Water", "Rock"],
+    "image": "/images/pokemons/charmander.png",
+    "hp": 90,
+    "basicAttack": { "name": "Scratch", "power": 8 },
+    "abilities": [
+      { "name": "Flamethrower", "power": 30, "cooldown": 2, "type": "attack" },
+      { "name": "Fire Shield", "power": 0, "cooldown": 3, "type": "defense" },
+      { "name": "Burn Heal", "power": 18, "cooldown": 4, "type": "heal" }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Squirtle",
+    "type": "Water",
+    "strongAgainst": ["Fire", "Rock"],
+    "weakAgainst": ["Electric", "Grass"],
+    "image": "/images/pokemons/squirtle.png",
+    "hp": 110,
+    "basicAttack": { "name": "Tackle", "power": 9 },
+    "abilities": [
+      { "name": "Water Gun", "power": 20, "cooldown": 2, "type": "attack" },
+      { "name": "Aqua Shield", "power": 0, "cooldown": 3, "type": "defense" },
+      { "name": "Hydro Heal", "power": 15, "cooldown": 4, "type": "heal" }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Bulbasaur",
+    "type": "Grass",
+    "strongAgainst": ["Water", "Rock"],
+    "weakAgainst": ["Fire", "Flying", "Bug"],
+    "image": "/images/pokemons/bulbasaur.png",
+    "hp": 105,
+    "basicAttack": { "name": "Vine Whip", "power": 9 },
+    "abilities": [
+      { "name": "Razor Leaf", "power": 22, "cooldown": 2, "type": "attack" },
+      { "name": "Leech Seed", "power": 15, "cooldown": 3, "type": "heal" },
+      { "name": "Nature Shield", "power": 0, "cooldown": 3, "type": "defense" }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Caterpie",
+    "type": "Bug",
+    "strongAgainst": ["Grass", "Psychic"],
+    "weakAgainst": ["Fire", "Flying"],
+    "image": "/images/pokemons/caterpie.png",
+    "hp": 60,
+    "basicAttack": { "name": "Tackle", "power": 6 },
+    "abilities": [
+      { "name": "String Shot", "power": 8, "cooldown": 2, "type": "attack" },
+      { "name": "Cocoon Up", "power": 0, "cooldown": 3, "type": "defense" },
+      { "name": "Tiny Rest", "power": 10, "cooldown": 5, "type": "heal" }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Pidgey",
+    "type": "Flying",
+    "strongAgainst": ["Bug", "Grass"],
+    "weakAgainst": ["Electric", "Rock"],
+    "image": "/images/pokemons/pidgey.png",
+    "hp": 80,
+    "basicAttack": { "name": "Peck", "power": 7 },
+    "abilities": [
+      { "name": "Gust", "power": 20, "cooldown": 2, "type": "attack" },
+      { "name": "Feather Shield", "power": 0, "cooldown": 3, "type": "defense" },
+      { "name": "Wind Recovery", "power": 12, "cooldown": 4, "type": "heal" }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Ekans",
+    "type": "Poison",
+    "strongAgainst": ["Grass", "Fairy"],
+    "weakAgainst": ["Ground", "Psychic"],
+    "image": "/images/pokemons/ekans.png",
+    "hp": 85,
+    "basicAttack": { "name": "Bite", "power": 9 },
+    "abilities": [
+      { "name": "Poison Fang", "power": 18, "cooldown": 2, "type": "attack" },
+      { "name": "Venom Skin", "power": 0, "cooldown": 3, "type": "defense" },
+      { "name": "Toxic Heal", "power": 14, "cooldown": 4, "type": "heal" }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Vulpix",
+    "type": "Fire",
+    "strongAgainst": ["Grass", "Bug"],
+    "weakAgainst": ["Water", "Ground", "Rock"],
+    "image": "/images/pokemons/vulpix.png",
+    "hp": 95,
+    "basicAttack": { "name": "Ember", "power": 10 },
+    "abilities": [
+      { "name": "Fire Spin", "power": 22, "cooldown": 2, "type": "attack" },
+      { "name": "Fox Flame", "power": 0, "cooldown": 3, "type": "defense" },
+      { "name": "Blaze Heal", "power": 18, "cooldown": 4, "type": "heal" }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Jigglypuff",
+    "type": "Fairy",
+    "strongAgainst": ["Dragon", "Dark", "Fighting"],
+    "weakAgainst": ["Poison", "Steel"],
+    "image": "/images/pokemons/jigglypuff.png",
+    "hp": 120,
+    "basicAttack": { "name": "Pound", "power": 8 },
+    "abilities": [
+      { "name": "Disarming Voice", "power": 20, "cooldown": 2, "type": "attack" },
+      { "name": "Sing", "power": 0, "cooldown": 4, "type": "defense" },
+      { "name": "Rest", "power": 25, "cooldown": 5, "type": "heal" }
+    ]
+  }
+]
