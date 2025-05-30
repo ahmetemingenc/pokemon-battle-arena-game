@@ -1,25 +1,28 @@
 <template>
-  <!-- eğer pokemon objesi varsa kartı göstermek için v-if -->
-  <div v-if="pokemon" class="pokemon-card-wrapper">
-    <!-- pokemon kartı seçili ise selected sınıfı eklenir tıklama eventi emit edilir -->
+  <div
+      v-if="pokemon"
+      class="pokemon-card-wrapper"
+      ref="wrapperRef"
+      @mouseenter="onMouseEnter"
+      @mouseleave="onMouseLeave"
+  >
     <div class="pokemon-card" :class="{ selected }" @click="emitClick">
-      <!-- Pokémon görseli -->
       <img :src="pokemon.image" />
-      <!-- Pokémon ismi -->
       <h3>{{ pokemon.name }}</h3>
-      <!-- Pokémon tipi -->
       <p>{{ pokemon.type }}</p>
     </div>
 
-    <!-- kart üzerine hover yapıldığında gösterilecek detaylı bilgi kutusu -->
-    <div class="pokemon-tooltip">
+    <div
+        class="pokemon-tooltip"
+        ref="tooltipRef"
+        v-show="showTooltip"
+    >
       <p><strong>Type:</strong> {{ pokemon.type }}</p>
       <p><strong>Strong:</strong> {{ pokemon.strongAgainst.join(', ') }}</p>
       <p><strong>Weak:</strong> {{ pokemon.weakAgainst.join(', ') }}</p>
       <p><strong>HP:</strong> {{ pokemon.hp }}</p>
       <p><strong>Basic:</strong> {{ pokemon.basicAttack.name }} ({{ pokemon.basicAttack.power }})</p>
       <p><strong>Abilities:</strong></p>
-      <!-- pokemonun sahip olduğu özel yeteneklerin listesi -->
       <ul>
         <li v-for="(a, i) in pokemon.abilities" :key="i">
           {{ a.name }} ({{ a.power }} power, Cooldown: {{ a.cooldown }})
@@ -30,19 +33,52 @@
 </template>
 
 <script setup>
+import { ref, nextTick } from 'vue'
 
-// props olarak parent bileşenden gelen pokemon objesi ve seçili olup olmadığını alıyoruz, kontrol için
 const props = defineProps({
   pokemon: Object,
   selected: Boolean
 })
 
-// select eventini parenta göndermek için emit tanımı
 const emit = defineEmits(['select'])
 
-// kart tıklandığında select eventini pokemon objesiyle emit eder
+const showTooltip = ref(false)
+const tooltipRef = ref(null)
+const wrapperRef = ref(null)
+
 const emitClick = () => emit('select', props.pokemon)
+
+const adjustTooltipPosition = () => {
+  nextTick(() => {
+    if (!tooltipRef.value || !wrapperRef.value) return
+
+    const tooltipRect = tooltipRef.value.getBoundingClientRect()
+    const wrapperRect = wrapperRef.value.getBoundingClientRect()
+    const windowHeight = window.innerHeight
+
+    // wrapper’ın alt kenarı pencereye çok yakın mı kontrol et
+    const wrapperCloseToBottom = (windowHeight - wrapperRect.bottom) < tooltipRect.height
+
+    if (wrapperCloseToBottom) {
+      tooltipRef.value.style.top = 'auto'
+      tooltipRef.value.style.bottom = '105%'
+    } else {
+      tooltipRef.value.style.top = '105%'
+      tooltipRef.value.style.bottom = 'auto'
+    }
+  })
+}
+
+const onMouseEnter = () => {
+  showTooltip.value = true
+  adjustTooltipPosition()
+}
+
+const onMouseLeave = () => {
+  showTooltip.value = false
+}
 </script>
+
 
 <style scoped>
 .pokemon-card-wrapper {
@@ -86,12 +122,11 @@ const emitClick = () => emit('select', props.pokemon)
 }
 
 .pokemon-tooltip {
-  display: none;
+  display: block;
   position: absolute;
-  top: 105%;
   left: 50%;
   transform: translateX(-50%);
-  width: 200px;
+  width: 220px;
   background: #111118;
   border: 1px solid var(--color-primary-pink);
   border-radius: 12px;
@@ -101,19 +136,8 @@ const emitClick = () => emit('select', props.pokemon)
   box-shadow: 0 0 15px var(--color-primary-pink);
   z-index: 10;
   white-space: normal;
+  top: 105%;
+  bottom: auto;
 }
 
-.pokemon-card-wrapper:hover .pokemon-tooltip {
-  display: block;
-}
-
-.pokemon-tooltip ul {
-  padding-left: 16px;
-  margin: 4px 0 0;
-}
-
-.pokemon-tooltip li {
-  margin-bottom: 4px;
-  font-size: 12px;
-}
 </style>

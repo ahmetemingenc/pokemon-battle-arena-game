@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
-const showNavPages = ['Home', 'BattleHistory']
+const showNavPages = ['Home', 'BattleHistory', 'About']
 </script>
 
 <template>
@@ -22,12 +22,12 @@ const showNavPages = ['Home', 'BattleHistory']
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
 :root {
-  --color-background: #0F0F1A;
-  --color-primary-pink: #FF2D95;
-  --color-primary-blue: #08F7FE;
-  --color-text-primary: #E0E0E0;
-  --color-text-secondary: #8888AA;
-  --color-danger: #FF416C;
+  --color-background: #0f0f1a;
+  --color-primary-pink: #ff2d95;
+  --color-primary-blue: #08f7fe;
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #8888aa;
+  --color-danger: #ff416c;
 }
 
 body {

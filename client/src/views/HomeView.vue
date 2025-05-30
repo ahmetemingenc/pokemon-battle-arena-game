@@ -4,26 +4,30 @@
 
     <div class="selection-block">
       <h2>Your Pokémon</h2>
-      <div class="card-grid">
+      <button @click="selectRandom('player')" class="random-button">Random</button>
+      <div class="card-grid" ref="playerGrid">
         <PokemonCard
-            v-for="poke in pokemons"
+            v-for="(poke, idx) in pokemons"
             :key="poke.id"
             :pokemon="poke"
             :selected="playerPokemon?.id === poke.id"
             @select="() => selectPokemon(poke, 'player')"
+            ref="playerPokemonRefs"
         />
       </div>
     </div>
 
     <div class="selection-block">
       <h2>Enemy Pokémon</h2>
-      <div class="card-grid">
+      <button @click="selectRandom('opponent')" class="random-button">Random</button>
+      <div class="card-grid" ref="opponentGrid">
         <PokemonCard
-            v-for="poke in pokemons"
+            v-for="(poke, idx) in pokemons"
             :key="poke.id"
             :pokemon="poke"
             :selected="opponentPokemon?.id === poke.id"
             @select="() => selectPokemon(poke, 'opponent')"
+            ref="opponentPokemonRefs"
         />
       </div>
     </div>
@@ -39,7 +43,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
 import PokemonCard from '../components/PokemonCard.vue'
@@ -51,16 +55,68 @@ const playerPokemon = ref(null)
 const opponentPokemon = ref(null)
 const store = usePokemonStore()
 
+const playerPokemonRefs = ref([])
+const opponentPokemonRefs = ref([])
+
 const fetchPokemons = async () => {
   const res = await axios.get('http://localhost:3000/api/pokemons')
   pokemons.value = res.data
 }
 
-const selectPokemon = (pokemon, side) => {
+const scrollToSelected = (side) => {
+  let selectedPokemon = null
+  let refsArray = null
+
+  if (side === 'player') {
+    selectedPokemon = playerPokemon.value
+    refsArray = playerPokemonRefs.value
+  } else {
+    selectedPokemon = opponentPokemon.value
+    refsArray = opponentPokemonRefs.value
+  }
+  if (!selectedPokemon || !refsArray || refsArray.length === 0) return
+
+  const idx = pokemons.value.findIndex(p => p.id === selectedPokemon.id)
+  if (idx === -1) return
+
+  const el = refsArray[idx]?.$el || refsArray[idx]
+  if (el && el.scrollIntoView) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' })
+  }
+}
+
+const selectPokemon = async (pokemon, side) => {
   if (side === 'player') {
     playerPokemon.value = pokemon
+    await nextTick()
+    scrollToSelected('player')
   } else if (side === 'opponent' && pokemon.id !== playerPokemon.value?.id) {
     opponentPokemon.value = pokemon
+    await nextTick()
+    scrollToSelected('opponent')
+  }
+}
+
+const selectRandom = async (side) => {
+  if (pokemons.value.length === 0) return
+  const randomPokemon = pokemons.value[Math.floor(Math.random() * pokemons.value.length)]
+
+  if (side === 'player') {
+    playerPokemon.value = randomPokemon
+    await nextTick()
+    scrollToSelected('player')
+  } else if (side === 'opponent') {
+    if (randomPokemon.id === playerPokemon.value?.id) {
+      const filteredPokemons = pokemons.value.filter(p => p.id !== playerPokemon.value?.id)
+      if (filteredPokemons.length === 0) return
+      opponentPokemon.value = filteredPokemons[Math.floor(Math.random() * filteredPokemons.length)]
+      await nextTick()
+      scrollToSelected('opponent')
+    } else {
+      opponentPokemon.value = randomPokemon
+      await nextTick()
+      scrollToSelected('opponent')
+    }
   }
 }
 
@@ -104,5 +160,20 @@ onMounted(fetchPokemons)
 }
 .start-button:hover {
   background-color: #388e3c;
+}
+
+.random-button {
+  margin-bottom: 10px;
+  padding: 8px 18px;
+  background-color: var(--color-primary-pink);
+  color: #111;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.random-button:hover {
+  background-color: #e91e63;
 }
 </style>

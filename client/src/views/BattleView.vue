@@ -2,7 +2,7 @@
   <div v-if="player && opponent" class="battle-wrapper">
     <div class="battle-container">
       <div class="pokemon-card player" :class="{ hit: wasPlayerHit }">
-        <img :src="player.image" />
+        <img :src="player.image"/>
         <h3>{{ player.name }} (You)</h3>
         <div class="hp-bar">
           <div class="hp-fill" :style="{ width: playerHP + '%' }"></div>
@@ -11,7 +11,7 @@
       </div>
 
       <div class="pokemon-card opponent" :class="{ hit: wasOpponentHit }">
-        <img :src="opponent.image" />
+        <img :src="opponent.image"/>
         <h3>{{ opponent.name }} (Enemy)</h3>
         <div class="hp-bar">
           <div class="hp-fill" :style="{ width: opponentHP + '%' }"></div>
@@ -38,9 +38,9 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-import { ref } from 'vue'
-import { usePokemonStore } from '../store/pokemonStore'
+import {useRouter} from 'vue-router'
+import {ref} from 'vue'
+import {usePokemonStore} from '../store/pokemonStore'
 import axios from 'axios'
 
 const router = useRouter()
@@ -60,18 +60,41 @@ const moves = ref([player.value.basicAttack, ...player.value.abilities])
 const playerHP = ref(player.value?.hp ?? 100)
 const opponentHP = ref(opponent.value?.hp ?? 100)
 const cooldowns = ref(moves.value.map(() => 0))
-const moveTypesCooldown = { attack: 2, defense: 2, heal: 3 }
+const moveTypesCooldown = {attack: 2, defense: 2, heal: 3}
 const wasPlayerHit = ref(false)
 const wasOpponentHit = ref(false)
 const isBusy = ref(false)
 const battleLogs = ref([])
+const playerShielded = ref(false)
+const opponentShielded = ref(false)
+
+const typeEffectiveness = {
+  fighting: {strongAgainst: ['normal', 'ice', 'rock'], weakAgainst: ['flying', 'psychic', 'fairy']},
+  fire: {strongAgainst: ['grass', 'ice', 'bug'], weakAgainst: ['water', 'ground', 'rock']},
+  water: {strongAgainst: ['fire', 'ground', 'rock'], weakAgainst: ['electric', 'grass']},
+  grass: {strongAgainst: ['water', 'ground', 'rock'], weakAgainst: ['fire', 'ice', 'flying']},
+  bug: {strongAgainst: ['grass', 'psychic'], weakAgainst: ['fire', 'ice', 'flying']},
+  poison: {strongAgainst: ['grass', 'fairy'], weakAgainst: ['ground', 'psychic']},
+  electric: {strongAgainst: ['water', 'flying'], weakAgainst: ['ground']},
+}
 
 const calculateDamage = (attacker, defender, move) => {
-  let multiplier = 1
-  if (attacker.strongAgainst?.includes(defender.type)) multiplier = 2
-  else if (attacker.weakAgainst?.includes(defender.type)) multiplier = 0.5
-  return (move.power ?? 0) * multiplier
+  const basePower = move.power ?? 0
+  const attackerType = attacker.type.toLowerCase()
+  const defenderType = defender.type.toLowerCase()
+
+  const typeInfo = typeEffectiveness[attackerType]
+  if (!typeInfo) return basePower
+
+  if (typeInfo.strongAgainst.includes(defenderType)) {
+    return basePower * 2
+  } else if (typeInfo.weakAgainst.includes(defenderType)) {
+    return basePower * 0.5
+  } else {
+    return basePower
+  }
 }
+
 
 const saveBattleLog = async (winner) => {
   const logEntry = {
@@ -91,12 +114,12 @@ const checkWinCondition = async () => {
   if (playerHP.value <= 0) {
     await saveBattleLog('opponent')
     store.setWinner('opponent')
-    router.push({ name: 'Result' })
+    router.push({name: 'Result'})
     return true
   } else if (opponentHP.value <= 0) {
     await saveBattleLog('player')
     store.setWinner('player')
-    router.push({ name: 'Result' })
+    router.push({name: 'Result'})
     return true
   }
   return false
@@ -107,11 +130,23 @@ const enemyAttack = () => {
   const allMoves = [opponent.value.basicAttack, ...opponent.value.abilities]
   const available = allMoves.filter((m, i) => cooldowns.value[i] === 0)
   const move = available[Math.floor(Math.random() * available.length)] || opponent.value.basicAttack
-  const damage = calculateDamage(opponent.value, player.value, move)
-  playerHP.value = Math.max(0, playerHP.value - damage)
-  wasPlayerHit.value = true
-  setTimeout(() => (wasPlayerHit.value = false), 300)
-  battleLogs.value.unshift(`${opponent.value.name} used ${move.name} and dealt ${damage} damage`)
+
+  if (move.type === 'defense') {
+    opponentShielded.value = true
+    battleLogs.value.unshift(`${opponent.value.name} used ${move.name} and raised a shield`)
+  } else {
+    let damage = calculateDamage(opponent.value, player.value, move)
+    if (playerShielded.value) {
+      damage = 0
+      playerShielded.value = false
+      battleLogs.value.unshift(`${player.value.name}'s shield blocked the attack!`)
+    }
+    playerHP.value = Math.max(0, playerHP.value - damage)
+    wasPlayerHit.value = true
+    setTimeout(() => (wasPlayerHit.value = false), 300)
+    battleLogs.value.unshift(`${opponent.value.name} used ${move.name} and dealt ${damage} damage`)
+  }
+
   checkWinCondition()
 
   roundCount++
@@ -126,12 +161,20 @@ const attack = (move, index) => {
   if (playerHP.value <= 0 || opponentHP.value <= 0 || isBusy.value) return
   isBusy.value = true
 
-  if (move.type === 'heal') {
+  if (move.type === 'defense') {
+    playerShielded.value = true
+    battleLogs.value.unshift(`${player.value.name} used ${move.name} and raised a shield`)
+  } else if (move.type === 'heal') {
     const healed = Math.min(player.value.hp - playerHP.value, move.power)
     playerHP.value = Math.min(player.value.hp, playerHP.value + move.power)
     battleLogs.value.unshift(`${player.value.name} used ${move.name} and healed ${healed} HP`)
   } else {
-    const damage = calculateDamage(player.value, opponent.value, move)
+    let damage = calculateDamage(player.value, opponent.value, move)
+    if (opponentShielded.value) {
+      damage = 0
+      opponentShielded.value = false
+      battleLogs.value.unshift(`${opponent.value.name}'s shield blocked the attack!`)
+    }
     opponentHP.value = Math.max(0, opponentHP.value - damage)
     wasOpponentHit.value = true
     setTimeout(() => (wasOpponentHit.value = false), 300)
@@ -163,6 +206,7 @@ const attack = (move, index) => {
   gap: 20px;
   padding-top: 30px;
 }
+
 .battle-container {
   display: flex;
   justify-content: space-around;
@@ -171,16 +215,19 @@ const attack = (move, index) => {
   margin-top: 30px;
   margin-bottom: 30px;
 }
+
 .pokemon-card {
   text-align: center;
   width: 200px;
   transition: transform 0.3s ease;
 }
+
 .pokemon-card img {
   width: 150px;
   height: 150px;
   object-fit: contain;
 }
+
 .hp-bar {
   width: 100%;
   height: 20px;
@@ -189,11 +236,13 @@ const attack = (move, index) => {
   overflow: hidden;
   margin-top: 10px;
 }
+
 .hp-fill {
   height: 100%;
   background-color: #4caf50;
   transition: width 0.3s ease;
 }
+
 .attack-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -201,6 +250,7 @@ const attack = (move, index) => {
   justify-content: center;
   margin-bottom: 20px;
 }
+
 .battle-log {
   width: 100%;
   max-width: 600px;
@@ -213,6 +263,7 @@ const attack = (move, index) => {
   overflow-y: auto;
   box-shadow: 0 0 5px rgb(183, 0, 255);
 }
+
 .hit {
   transform: scale(1.05);
   box-shadow: 0 0 15px red;

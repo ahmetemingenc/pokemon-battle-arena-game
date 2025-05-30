@@ -1,9 +1,37 @@
 <template>
   <div class="battle-history-wrapper">
-    <h2>Battle History</h2>
-    <ul>
-      <li v-for="(log, index) in battleLogs" :key="index">
-        {{ log.player }} vs {{ log.opponent }} — Winner: {{ log.winner }} — Turns: {{ log.turns }}
+    <h2>battle history</h2>
+    <ul class="battle-list">
+      <li v-for="(log, index) in battleLogs" :key="index" class="battle-item">
+        <div class="pokemon-info">
+          <img
+              :src="findPokemonByName(log.player)?.image"
+              alt="player pokemon"
+              class="pokemon-image"
+          />
+          <span>{{ log.player }}</span>
+        </div>
+
+        <div class="vs-text">vs</div>
+
+        <div class="pokemon-info">
+          <img
+              :src="findPokemonByName(log.opponent)?.image"
+              alt="opponent pokemon"
+              class="pokemon-image"
+          />
+          <span>{{ log.opponent }}</span>
+        </div>
+
+        <div class="battle-summary">
+          <span class="battle-winner" :class="{
+            'winner-player': log.winner === 'player',
+            'winner-opponent': log.winner === 'opponent'
+          }">
+            {{ log.winner === 'player' ? 'player wins' : 'opponent wins' }}
+          </span>
+          <span>turns: {{ log.turns }}</span>
+        </div>
       </li>
     </ul>
   </div>
@@ -14,19 +42,38 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
 const battleLogs = ref([])
+const pokemons = ref([])
 
-onMounted(async () => {
+const fetchBattles = async () => {
   try {
     const res = await axios.get('http://localhost:3000/api/battle-history')
     battleLogs.value = res.data
   } catch (error) {
-    console.error('Battle history yüklenemedi:', error)
+    console.error('battle history yüklenemedi:', error)
   }
+}
+
+const fetchPokemons = async () => {
+  try {
+    const res = await axios.get('http://localhost:3000/api/pokemons')
+    pokemons.value = res.data
+  } catch (error) {
+    console.error('pokemonlar yüklenemedi:', error)
+  }
+}
+
+const findPokemonByName = (name) => {
+  return pokemons.value.find(p => p.name === name)
+}
+
+onMounted(() => {
+  fetchPokemons()
+  fetchBattles()
 })
 </script>
 
 <style scoped>
-.history-wrapper {
+.battle-history-wrapper {
   max-width: 900px;
   margin: 40px auto;
   background: #111118;
@@ -37,18 +84,12 @@ onMounted(async () => {
   font-family: 'Orbitron', monospace;
 }
 
-h1 {
+h2 {
   font-size: 2.8rem;
   margin-bottom: 25px;
   text-align: center;
+  text-transform: uppercase;
   text-shadow: 0 0 8px var(--color-primary-pink);
-}
-
-.loading, .empty-message {
-  font-size: 1.4rem;
-  text-align: center;
-  padding: 40px 0;
-  color: var(--color-text-secondary);
 }
 
 .battle-list {
@@ -64,8 +105,8 @@ h1 {
   padding: 20px 25px;
   margin-bottom: 15px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 15px;
   box-shadow: 0 0 20px var(--color-primary-pink);
   transition: box-shadow 0.3s ease;
 }
@@ -74,27 +115,53 @@ h1 {
   box-shadow: 0 0 40px var(--color-primary-blue);
 }
 
-.battle-summary span {
+.pokemon-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+}
+
+.pokemon-image {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 5px;
+}
+
+.vs-text {
   font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-primary-pink);
+  user-select: none;
+  min-width: 30px;
+  text-align: center;
+}
+
+.battle-summary {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: right;
+  min-width: 150px;
 }
 
 .battle-winner {
-  font-weight: 700;
-  font-size: 1.4rem;
   padding: 6px 14px;
   border-radius: 10px;
   user-select: none;
 }
 
 .winner-player {
-  background-color: var(--color-primary-pink);
+  background-color: var(--color-primary-blue);
   color: #111;
-  text-shadow: none;
 }
 
 .winner-opponent {
-  background-color: var(--color-primary-blue);
+  background-color: var(--color-primary-pink);
   color: #111;
-  text-shadow: none;
 }
 </style>

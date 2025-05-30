@@ -61,51 +61,21 @@
   },
   {
     "id": 5,
-    "name": "Caterpie",
-    "type": "Bug",
-    "strongAgainst": ["Grass", "Psychic"],
-    "weakAgainst": ["Fire", "Flying"],
-    "image": "/images/pokemons/caterpie.png",
-    "hp": 60,
-    "basicAttack": { "name": "Tackle", "power": 6 },
+    "name": "Machop",
+    "type": "Fighting",
+    "strongAgainst": ["Normal", "Ice", "Rock"],
+    "weakAgainst": ["Flying", "Psychic", "Fairy"],
+    "image": "/images/pokemons/machop.png",
+    "hp": 70,
+    "basicAttack": { "name": "Karate Chop", "power": 15, "type": "attack" },
     "abilities": [
-      { "name": "String Shot", "power": 8, "cooldown": 2, "type": "attack" },
-      { "name": "Cocoon Up", "power": 0, "cooldown": 3, "type": "defense" },
-      { "name": "Tiny Rest", "power": 10, "cooldown": 5, "type": "heal" }
+      { "name": "Low Kick", "power": 25, "cooldown": 2, "type": "attack" },
+      { "name": "Bulk Up", "power": 0, "cooldown": 3, "type": "defense" },
+      { "name": "Rest", "power": 20, "cooldown": 4, "type": "heal" }
     ]
   },
   {
     "id": 6,
-    "name": "Pidgey",
-    "type": "Flying",
-    "strongAgainst": ["Bug", "Grass"],
-    "weakAgainst": ["Electric", "Rock"],
-    "image": "/images/pokemons/pidgey.png",
-    "hp": 80,
-    "basicAttack": { "name": "Peck", "power": 7 },
-    "abilities": [
-      { "name": "Gust", "power": 20, "cooldown": 2, "type": "attack" },
-      { "name": "Feather Shield", "power": 0, "cooldown": 3, "type": "defense" },
-      { "name": "Wind Recovery", "power": 12, "cooldown": 4, "type": "heal" }
-    ]
-  },
-  {
-    "id": 7,
-    "name": "Ekans",
-    "type": "Poison",
-    "strongAgainst": ["Grass", "Fairy"],
-    "weakAgainst": ["Ground", "Psychic"],
-    "image": "/images/pokemons/ekans.png",
-    "hp": 85,
-    "basicAttack": { "name": "Bite", "power": 9 },
-    "abilities": [
-      { "name": "Poison Fang", "power": 18, "cooldown": 2, "type": "attack" },
-      { "name": "Venom Skin", "power": 0, "cooldown": 3, "type": "defense" },
-      { "name": "Toxic Heal", "power": 14, "cooldown": 4, "type": "heal" }
-    ]
-  },
-  {
-    "id": 8,
     "name": "Vulpix",
     "type": "Fire",
     "strongAgainst": ["Grass", "Bug"],
@@ -120,7 +90,67 @@
     ]
   },
   {
+    "id": 7,
+    "name": "Pidgey",
+    "type": "Flying",
+    "strongAgainst": ["Bug", "Grass"],
+    "weakAgainst": ["Electric", "Rock"],
+    "image": "/images/pokemons/pidgey.png",
+    "hp": 80,
+    "basicAttack": { "name": "Peck", "power": 7 },
+    "abilities": [
+      { "name": "Gust", "power": 20, "cooldown": 2, "type": "attack" },
+      { "name": "Feather Shield", "power": 0, "cooldown": 3, "type": "defense" },
+      { "name": "Wind Recovery", "power": 12, "cooldown": 4, "type": "heal" }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Oddish",
+    "type": "Grass",
+    "strongAgainst": ["Water", "Ground", "Rock"],
+    "weakAgainst": ["Fire", "Ice", "Flying"],
+    "image": "/images/pokemons/oddish.png",
+    "hp": 55,
+    "basicAttack": { "name": "Absorb", "power": 10, "type": "attack" },
+    "abilities": [
+      { "name": "Poison Powder", "power": 15, "cooldown": 2, "type": "attack" },
+      { "name": "Sleep Powder", "power": 0, "cooldown": 3, "type": "defense" },
+      { "name": "Synthesis", "power": 20, "cooldown": 4, "type": "heal" }
+    ]
+  },
+  {
     "id": 9,
+    "name": "Mankey",
+    "type": "Fighting",
+    "strongAgainst": ["Normal", "Ice", "Rock"],
+    "weakAgainst": ["Flying", "Psychic", "Fairy"],
+    "image": "/images/pokemons/mankey.png",
+    "hp": 60,
+    "basicAttack": { "name": "Scratch", "power": 12, "type": "attack" },
+    "abilities": [
+      { "name": "Fury Swipes", "power": 20, "cooldown": 2, "type": "attack" },
+      { "name": "Focus Energy", "power": 0, "cooldown": 3, "type": "defense" },
+      { "name": "Healing Wish", "power": 15, "cooldown": 4, "type": "heal" }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Ekans",
+    "type": "Poison",
+    "strongAgainst": ["Grass", "Fairy"],
+    "weakAgainst": ["Ground", "Psychic"],
+    "image": "/images/pokemons/ekans.png",
+    "hp": 85,
+    "basicAttack": { "name": "Bite", "power": 9 },
+    "abilities": [
+      { "name": "Poison Fang", "power": 18, "cooldown": 2, "type": "attack" },
+      { "name": "Venom Skin", "power": 0, "cooldown": 3, "type": "defense" },
+      { "name": "Toxic Heal", "power": 14, "cooldown": 4, "type": "heal" }
+    ]
+  },
+  {
+    "id": 11,
     "name": "Jigglypuff",
     "type": "Fairy",
     "strongAgainst": ["Dragon", "Dark", "Fighting"],
@@ -132,6 +162,21 @@
       { "name": "Disarming Voice", "power": 20, "cooldown": 2, "type": "attack" },
       { "name": "Sing", "power": 0, "cooldown": 4, "type": "defense" },
       { "name": "Rest", "power": 25, "cooldown": 5, "type": "heal" }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Caterpie",
+    "type": "Bug",
+    "strongAgainst": ["Grass", "Psychic"],
+    "weakAgainst": ["Fire", "Flying"],
+    "image": "/images/pokemons/caterpie.png",
+    "hp": 60,
+    "basicAttack": { "name": "Tackle", "power": 6 },
+    "abilities": [
+      { "name": "String Shot", "power": 8, "cooldown": 2, "type": "attack" },
+      { "name": "Cocoon Up", "power": 0, "cooldown": 3, "type": "defense" },
+      { "name": "Tiny Rest", "power": 10, "cooldown": 5, "type": "heal" }
     ]
   }
 ]

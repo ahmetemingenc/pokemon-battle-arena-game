@@ -52,5 +52,65 @@
     "opponent": "Squirtle",
     "winner": "player",
     "turns": 3
+  },
+  {
+    "player": "Jigglypuff",
+    "opponent": "Ekans",
+    "winner": "player",
+    "turns": 16
+  },
+  {
+    "player": "Charmander",
+    "opponent": "Squirtle",
+    "winner": "opponent",
+    "turns": 6
+  },
+  {
+    "player": "Charmander",
+    "opponent": "Bulbasaur",
+    "winner": "player",
+    "turns": 5
+  },
+  {
+    "player": "Pikachu",
+    "opponent": "Squirtle",
+    "winner": "player",
+    "turns": 5
+  },
+  {
+    "player": "Pikachu",
+    "opponent": "Squirtle",
+    "winner": "player",
+    "turns": 3
+  },
+  {
+    "player": "Pidgey",
+    "opponent": "Vulpix",
+    "winner": "player",
+    "turns": 9
+  },
+  {
+    "player": "Pikachu",
+    "opponent": "Squirtle",
+    "winner": "player",
+    "turns": 8
+  },
+  {
+    "player": "Machop",
+    "opponent": "Oddish",
+    "winner": "player",
+    "turns": 4
+  },
+  {
+    "player": "Mankey",
+    "opponent": "Oddish",
+    "winner": "player",
+    "turns": 7
+  },
+  {
+    "player": "Vulpix",
+    "opponent": "Mankey",
+    "winner": "player",
+    "turns": 9
   }
 ]
