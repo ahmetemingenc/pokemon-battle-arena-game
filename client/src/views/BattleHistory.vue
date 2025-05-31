@@ -1,8 +1,14 @@
 <template>
+  <!-- savaş geçmişi sayfasının ana containerı -->
   <div class="battle-history-wrapper">
     <h2>battle history</h2>
+
+    <!-- savaş kayıtlarının listesi -->
     <ul class="battle-list">
+      <!-- her savaş kaydı için liste elemanı -->
       <li v-for="(log, index) in battleLogs" :key="index" class="battle-item">
+
+        <!-- oyuncunun pokemon bilgisi ve görseli -->
         <div class="pokemon-info">
           <img
               :src="findPokemonByName(log.player)?.image"
@@ -14,6 +20,7 @@
 
         <div class="vs-text">vs</div>
 
+        <!-- rakip pokemon bilgisi ve görseli -->
         <div class="pokemon-info">
           <img
               :src="findPokemonByName(log.opponent)?.image"
@@ -23,6 +30,7 @@
           <span>{{ log.opponent }}</span>
         </div>
 
+        <!-- savaş sonucu ve toplam tur sayısı -->
         <div class="battle-summary">
           <span class="battle-winner" :class="{
             'winner-player': log.winner === 'player',
@@ -32,27 +40,32 @@
           </span>
           <span>turns: {{ log.turns }}</span>
         </div>
+
       </li>
     </ul>
   </div>
 </template>
 
 <script setup>
+// ref importu ve axios module importu
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
+// savaş kayıtları ve pokemon listesi için reactive değişkenler
 const battleLogs = ref([])
 const pokemons = ref([])
 
+// sunucudan savaş kayıtlarını getiren fonksiyon
 const fetchBattles = async () => {
   try {
     const res = await axios.get('http://localhost:3000/api/battle-history')
     battleLogs.value = res.data
   } catch (error) {
-    console.error('battle history yüklenemedi:', error)
+    console.error(error)
   }
 }
 
+// sunucudan pokemon listesini getiren fonksiyon
 const fetchPokemons = async () => {
   try {
     const res = await axios.get('http://localhost:3000/api/pokemons')
@@ -62,15 +75,18 @@ const fetchPokemons = async () => {
   }
 }
 
+// verilen isim ile pokemon listesinden pokemon objesini bulur
 const findPokemonByName = (name) => {
   return pokemons.value.find(p => p.name === name)
 }
 
+// bileşen yüklendiğinde pokemon ve savaş kayıtları getirilir
 onMounted(() => {
   fetchPokemons()
   fetchBattles()
 })
 </script>
+
 
 <style scoped>
 .battle-history-wrapper {

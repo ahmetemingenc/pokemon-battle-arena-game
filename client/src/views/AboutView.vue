@@ -1,4 +1,5 @@
 <template>
+  <!-- about sayfası ana container -->
   <div class="about-wrapper">
     <h1>Welcome to Pokémon Battle Game</h1>
 
@@ -26,10 +27,6 @@
     </section>
   </div>
 </template>
-
-<script setup>
-// no dynamic data needed, static informational page
-</script>
 
 <style scoped>
 .about-wrapper {

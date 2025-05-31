@@ -1,24 +1,31 @@
 <script setup>
+// vue-router'dan route bilgisini almak için useRoute import edilir
 import { useRoute } from 'vue-router'
 
+// aktif route bilgisini tutar
 const route = useRoute()
 
+// nav barın gösterileceği sayfa isimleri listesi
 const showNavPages = ['Home', 'BattleHistory', 'About']
 </script>
 
 <template>
   <div>
+    <!-- sadece belirtilen sayfalarda nav bar gösterilir -->
     <nav v-if="showNavPages.includes(route.name)" class="main-nav">
       <router-link to="/">Pokemon Selection</router-link>
       <router-link to="/battle-history">Battle History</router-link>
       <router-link to="/about">About</router-link>
     </nav>
 
+    <!-- route'a göre uygun sayfa componenti render edilir -->
     <router-view />
   </div>
 </template>
 
+
 <style>
+/* oyunun genel tasarımını bu kısımda hallediyoruz*/
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
 :root {

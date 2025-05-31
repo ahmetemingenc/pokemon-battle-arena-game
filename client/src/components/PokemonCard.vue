@@ -1,4 +1,5 @@
 <template>
+  <!-- pokemon objesi varsa kart ve tooltip göster -->
   <div
       v-if="pokemon"
       class="pokemon-card-wrapper"
@@ -6,12 +7,13 @@
       @mouseenter="onMouseEnter"
       @mouseleave="onMouseLeave"
   >
+    <!-- pokemon kartı, seçili ise 'selected' sınıfı eklenir, tıklayınca emit yapar -->
     <div class="pokemon-card" :class="{ selected }" @click="emitClick">
       <img :src="pokemon.image" />
       <h3>{{ pokemon.name }}</h3>
       <p>{{ pokemon.type }}</p>
     </div>
-
+    <!-- tooltip: detaylı pokemon bilgileri, v-show ile görünürlük kontrolü -->
     <div
         class="pokemon-tooltip"
         ref="tooltipRef"
@@ -24,6 +26,7 @@
       <p><strong>Basic:</strong> {{ pokemon.basicAttack.name }} ({{ pokemon.basicAttack.power }})</p>
       <p><strong>Abilities:</strong></p>
       <ul>
+        <!-- pokemonun yeteneklerinin listesi -->
         <li v-for="(a, i) in pokemon.abilities" :key="i">
           {{ a.name }} ({{ a.power }} power, Cooldown: {{ a.cooldown }})
         </li>
@@ -35,19 +38,23 @@
 <script setup>
 import { ref, nextTick } from 'vue'
 
+// props: parent bileşenden gelen pokemon objesi ve seçili olup olmadığı
 const props = defineProps({
   pokemon: Object,
   selected: Boolean
 })
 
+// parent bileşene 'select' eventi göndermek için emit tanımı
 const emit = defineEmits(['select'])
 
 const showTooltip = ref(false)
 const tooltipRef = ref(null)
 const wrapperRef = ref(null)
 
+// kart tıklandığında seçili pokemonu parenta bildir
 const emitClick = () => emit('select', props.pokemon)
 
+// tooltip pozisyonunu ayarlayan fonksiyon (üstte veya altta açılmasını sağlar)
 const adjustTooltipPosition = () => {
   nextTick(() => {
     if (!tooltipRef.value || !wrapperRef.value) return
@@ -60,20 +67,24 @@ const adjustTooltipPosition = () => {
     const wrapperCloseToBottom = (windowHeight - wrapperRect.bottom) < tooltipRect.height
 
     if (wrapperCloseToBottom) {
+      // pencereye yakınsa tooltip yukarı açılsın
       tooltipRef.value.style.top = 'auto'
       tooltipRef.value.style.bottom = '105%'
     } else {
+      // değilse tooltip aşağı açılsın
       tooltipRef.value.style.top = '105%'
       tooltipRef.value.style.bottom = 'auto'
     }
   })
 }
 
+// fare wrappera girdiğinde tooltip açılır ve pozisyon ayarlanır
 const onMouseEnter = () => {
   showTooltip.value = true
   adjustTooltipPosition()
 }
 
+// fare wrapperdan çıktığında tooltip kapanır
 const onMouseLeave = () => {
   showTooltip.value = false
 }

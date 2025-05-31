@@ -2,10 +2,14 @@
   <div class="home-wrapper">
     <h1>Pokémon Selection Screen</h1>
 
+    <!-- oyuncu seçim bloğu -->
     <div class="selection-block">
       <h2>Your Pokémon</h2>
+      <!-- rastgele seçim butonu -->
       <button @click="selectRandom('player')" class="random-button">Random</button>
+      <!-- oyuncu pokemon kartlarının bulunduğu grid, ref ile erişim sağlanacak -->
       <div class="card-grid" ref="playerGrid">
+        <!-- pokemon kartları listeleniyor -->
         <PokemonCard
             v-for="(poke, idx) in pokemons"
             :key="poke.id"
@@ -17,6 +21,7 @@
       </div>
     </div>
 
+    <!-- rakip seçim bloğu -->
     <div class="selection-block">
       <h2>Enemy Pokémon</h2>
       <button @click="selectRandom('opponent')" class="random-button">Random</button>
@@ -32,6 +37,7 @@
       </div>
     </div>
 
+    <!-- her iki taraf için pokemon seçilmişse aktif olan savaşı başlat butonu -->
     <button
         v-if="playerPokemon && opponentPokemon"
         @click="startBattle"
@@ -58,11 +64,14 @@ const store = usePokemonStore()
 const playerPokemonRefs = ref([])
 const opponentPokemonRefs = ref([])
 
+// pokemonları api'den çekme fonksiyonu
 const fetchPokemons = async () => {
   const res = await axios.get('http://localhost:3000/api/pokemons')
   pokemons.value = res.data
 }
 
+/*
+// seçilen pokemonun görünür olması için scroll yapan fonksiyon
 const scrollToSelected = (side) => {
   let selectedPokemon = null
   let refsArray = null
@@ -76,15 +85,18 @@ const scrollToSelected = (side) => {
   }
   if (!selectedPokemon || !refsArray || refsArray.length === 0) return
 
+  // seçilen pokemonun indexini bul
   const idx = pokemons.value.findIndex(p => p.id === selectedPokemon.id)
   if (idx === -1) return
 
+  // ilgili kart elementini bul ve scroll yap
   const el = refsArray[idx]?.$el || refsArray[idx]
   if (el && el.scrollIntoView) {
     el.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' })
   }
 }
 
+// pokemon seçildiğinde state'i güncelle ve scroll yap
 const selectPokemon = async (pokemon, side) => {
   if (side === 'player') {
     playerPokemon.value = pokemon
@@ -96,7 +108,9 @@ const selectPokemon = async (pokemon, side) => {
     scrollToSelected('opponent')
   }
 }
+*/
 
+// rastgele pokemon seçen fonksiyon
 const selectRandom = async (side) => {
   if (pokemons.value.length === 0) return
   const randomPokemon = pokemons.value[Math.floor(Math.random() * pokemons.value.length)]
@@ -120,12 +134,14 @@ const selectRandom = async (side) => {
   }
 }
 
+// savaşı başlatır, seçilen pokemonları store'a kaydeder ve battle sayfasına yönlendirir
 const startBattle = () => {
   store.player = playerPokemon.value
   store.opponent = opponentPokemon.value
   router.push({ name: 'Battle' })
 }
 
+// component yüklendiğinde pokemonları api'den çek
 onMounted(fetchPokemons)
 </script>
 

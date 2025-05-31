@@ -5,19 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e3cefda-597e-4d96-8e57-cf458e2f2385" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/public/images/pokemons/machop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/images/pokemons/mankey.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/images/pokemons/oddish.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/images/pokemons/ponyta.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/PokemonCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/PokemonCard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/AboutView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/AboutView.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/BattleHistory.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/BattleHistory.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/BattleView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/BattleView.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/HomeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/HomeView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/ResultView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/ResultView.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/data/battles.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/data/battles.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/data/pokemons.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/data/pokemons.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +91,8 @@
       <workItem from="1748463100894" duration="165000" />
       <workItem from="1748476692553" duration="7000" />
       <workItem from="1748476707834" duration="132000" />
-      <workItem from="1748587618539" duration="5055000" />
+      <workItem from="1748587618539" duration="6149000" />
+      <workItem from="1748691615589" duration="2897000" />
     </task>
     <servers />
   </component>
