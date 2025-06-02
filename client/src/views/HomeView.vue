@@ -70,7 +70,6 @@ const fetchPokemons = async () => {
   pokemons.value = res.data
 }
 
-/*
 // seçilen pokemonun görünür olması için scroll yapan fonksiyon
 const scrollToSelected = (side) => {
   let selectedPokemon = null
@@ -108,7 +107,7 @@ const selectPokemon = async (pokemon, side) => {
     scrollToSelected('opponent')
   }
 }
-*/
+
 
 // rastgele pokemon seçen fonksiyon
 const selectRandom = async (side) => {

@@ -6,15 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1e3cefda-597e-4d96-8e57-cf458e2f2385" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/PokemonCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/PokemonCard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/AboutView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/AboutView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/BattleHistory.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/BattleHistory.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/BattleView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/BattleView.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/HomeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/HomeView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/ResultView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/ResultView.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/data/battles.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/data/battles.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,6 +29,9 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2wT3qQKYlhl541obInrT4rt2UvB" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -62,6 +57,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\legen\WebstormProjects\pokemon-battle-game\screenshots" />
       <recent name="C:\Users\legen\WebstormProjects\pokemon-battle-game\client\public\images\pokemons" />
       <recent name="C:\Users\legen\WebstormProjects\pokemon-battle-game\client\src\assets" />
       <recent name="C:\Users\legen\WebstormProjects\pokemon-battle-game" />
@@ -92,7 +88,8 @@
       <workItem from="1748476692553" duration="7000" />
       <workItem from="1748476707834" duration="132000" />
       <workItem from="1748587618539" duration="6149000" />
-      <workItem from="1748691615589" duration="2897000" />
+      <workItem from="1748691615589" duration="3269000" />
+      <workItem from="1748859743844" duration="3695000" />
     </task>
     <servers />
   </component>

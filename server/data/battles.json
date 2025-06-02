@@ -106,5 +106,17 @@
     "opponent": "Squirtle",
     "winner": "opponent",
     "turns": 7
+  },
+  {
+    "player": "Machop",
+    "opponent": "Caterpie",
+    "winner": "player",
+    "turns": 3
+  },
+  {
+    "player": "Pikachu",
+    "opponent": "Squirtle",
+    "winner": "player",
+    "turns": 4
   }
 ]
