@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e3cefda-597e-4d96-8e57-cf458e2f2385" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/HomeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/HomeView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/data/battles.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/data/battles.json" afterDir="false" />
-    </list>
+    <list default="true" id="1e3cefda-597e-4d96-8e57-cf458e2f2385" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -89,7 +85,7 @@
       <workItem from="1748476707834" duration="132000" />
       <workItem from="1748587618539" duration="6149000" />
       <workItem from="1748691615589" duration="3269000" />
-      <workItem from="1748859743844" duration="3695000" />
+      <workItem from="1748859743844" duration="4283000" />
     </task>
     <servers />
   </component>
