@@ -83,12 +83,12 @@ git clone <repo-url>
 cd <repo-klasörü>
 
 # 2. Backend kurulumu ve başlatma
-cd backend
+cd server
 npm install
-npm start
+node server.js
 
 # 3. Yeni terminal açın ve frontend'e geçin
-cd ../frontend
+cd client
 npm install
 npm run dev
 ```
@@ -99,17 +99,16 @@ Backend için: http://localhost:3000
 
 ---
 
-## 🗂️ Proje Yapısı
+## 🗂️ Temel Proje Yapısı
 ```
 /
-├── backend/
-│   ├── api/              # API rotaları
+├── server/
 │   ├── data/             # battles.json ve diğer veri dosyaları
 │   └── server.js         # Express sunucu başlangıcı
 │
-├── frontend/
+├── client/
 │   └── src/
-│       ├── components/   # Vue bileşenleri (Navbar, PokemonCard, vb.)
+│       ├── components/   # Vue bileşenleri (PokemonCard, vb.)
 │       ├── views/        # Sayfa bileşenleri (Home, Battle, Result, vb.)
 │       ├── store/        # Pinia store dosyaları
 │       └── main.js       # Uygulama başlangıcı
